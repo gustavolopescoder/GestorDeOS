@@ -1,13 +1,8 @@
 import "./app.css";
-import Dashboard from "./componentes/dashboard";
 import MenuLateral from "./componentes/menu";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Ordens from "./componentes/PageOrdem/ordens";
-import Tecnicos from "./componentes/tecnicos";
-import Empresas from "./componentes/empresas";
-import OrdemDetalhe from "./componentes/PageOrdem/OrdemDetalhe";
+import { BrowserRouter as Router } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import NewOrdem from "./componentes/NewOrdem";
+import AnimatedRoutes from "./componentes/AnimatedRoutes"; // novo arquivo
 
 function App() {
   const [empresas, setEmpresas] = useState([]);
@@ -53,33 +48,14 @@ function App() {
 
   return (
     <Router>
-      {/* Menu fixo à esquerda */}
       <MenuLateral />
-
-      {/* Área principal com scroll e margem lateral */}
-      <div className="ml-64 h-screen overflow-y-auto bg-slate-50 p-4">
-        <Routes>
-          <Route path="/" element={<Dashboard ordens={ordens} />} />
-          <Route
-            path="/ordens"
-            element={
-              <Ordens ordens={ordens} empresas={empresas} tecnicos={tecnicos} />
-            }
-          />
-          <Route path="/tecnicos" element={<Tecnicos />} />
-          <Route path="/empresas" element={<Empresas empresas={empresas} />} />
-          <Route path="/ordens/:id" element={<OrdemDetalhe />} />
-          <Route
-            path="/newOrdem"
-            element={
-              <NewOrdem
-                adicionarOrdem={adicionarOrdem}
-                empresas={empresas}
-                tecnicos={tecnicos}
-              />
-            }
-          />
-        </Routes>
+      <div className="sm:ml-64 h-screen overflow-y-auto bg-slate-50 p-4 transition-all duration-300">
+        <AnimatedRoutes
+          ordens={ordens}
+          empresas={empresas}
+          tecnicos={tecnicos}
+          adicionarOrdem={adicionarOrdem}
+        />
       </div>
     </Router>
   );

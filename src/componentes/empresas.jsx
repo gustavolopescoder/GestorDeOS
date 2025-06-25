@@ -84,22 +84,25 @@ function Empresas() {
   if (carregando) return <p>Carregando empresas...</p>;
 
   return (
-    <div className="bg-slate-50 w-full h-full p-4 space-y-6">
-      <div id="header" className="flex items-center justify-between mb-4">
+    <div className="bg-white rounded w-full min-h-screen p-4 space-y-6">
+      <div
+        id="header"
+        className="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4"
+      >
         <div className="flex items-center gap-2">
-          <HiOutlineBuildingOffice2 className="text-5xl text-blue-700" />
-          <h1 className="font-bold text-xl">Empresas</h1>
+          <HiOutlineBuildingOffice2 className="text-4xl sm:text-5xl text-blue-700" />
+          <h1 className="font-bold text-xl sm:text-2xl">Empresas</h1>
         </div>
         <button
           onClick={abrirAdicionar}
-          className="bg-gradient-to-r from-blue-500 to-blue-600  shadow p-2 rounded-md font-medium text-white transform hover:scale-105 transition duration-300"
+          className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-blue-600 shadow p-2 rounded-md font-medium text-white hover:scale-105 transition duration-300"
         >
           Adicionar Empresa
         </button>
       </div>
 
       {modoAdicionar && (
-        <div className="bg-white p-4 rounded shadow space-y-3">
+        <div className="bg-white p-4 rounded shadow space-y-3 max-w-lg mx-auto">
           <h2 className="text-lg font-semibold">Nova Empresa</h2>
           <input
             type="text"
@@ -122,16 +125,16 @@ function Empresas() {
             placeholder="Endereço da empresa"
             className="border p-2 rounded w-full"
           />
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <button
               onClick={adicionarEmpresa}
-              className="bg-green-600 text-white px-4 py-2 rounded"
+              className="bg-green-600 text-white px-4 py-2 rounded w-full sm:w-auto text-center"
             >
               Salvar
             </button>
             <button
               onClick={() => setModoAdicionar(false)}
-              className="bg-gray-400 text-white px-4 py-2 rounded"
+              className="bg-gray-400 text-white px-4 py-2 rounded w-full sm:w-auto text-center"
             >
               Cancelar
             </button>
@@ -139,32 +142,32 @@ function Empresas() {
         </div>
       )}
 
-      <div className="bg-white p-4 rounded shadow">
-        <ul className="space-y-1">
+      <div className="bg-white p-4 rounded shadow max-w-4xl mx-auto">
+        <ul className="space-y-2">
           {empresas.map((empresa) => (
             <li
               key={empresa.id}
-              className="border-b p-2 flex items-center justify-between"
+              className="border-b p-2 flex flex-col sm:flex-row items-start sm:items-center justify-between"
             >
-              <div className="flex gap-3 border p-4 rounded-md w-full justify-between">
-                <div className="flex items-center gap-3">
-                  <HiOutlineBuildingOffice2 className="text-3xl text-blue-800" />
-                  <div>
-                    <h1 className="font-medium text-xl">{empresa.nome}</h1>
-                    <p className="flex items-center gap-1 text-gray-500">
-                      <CiLocationOn />
-                      {empresa.endereco}
-                    </p>
-                  </div>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
+                <HiOutlineBuildingOffice2 className="text-3xl text-blue-800 flex-shrink-0" />
+                <div>
+                  <h1 className="font-medium text-lg sm:text-xl">
+                    {empresa.nome}
+                  </h1>
+                  <p className="flex items-center gap-1 text-gray-500 text-sm sm:text-base max-w-xs">
+                    <CiLocationOn />
+                    {empresa.endereco}
+                  </p>
                 </div>
-
-                <button
-                  onClick={() => excluirEmpresa(empresa.id)}
-                  className="text-red-600 font-medium hover:bg-red-400 p-1 rounded-md duration-300 hover:text-white text-sm"
-                >
-                  Excluir
-                </button>
               </div>
+
+              <button
+                onClick={() => excluirEmpresa(empresa.id)}
+                className="mt-3 sm:mt-0 text-red-600 font-medium hover:bg-red-400 p-1 rounded-md duration-300 hover:text-white text-sm w-full sm:w-auto text-center"
+              >
+                Excluir
+              </button>
             </li>
           ))}
         </ul>

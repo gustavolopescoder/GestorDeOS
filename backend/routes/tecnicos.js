@@ -32,5 +32,15 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: "Erro ao excluir técnico" });
   }
 });
+router.patch("/:id/desativar", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await db.query("UPDATE tecnicos SET ativo = false WHERE id = $1", [id]);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Erro ao desativar técnico:", error);
+    res.status(500).send("Erro ao desativar técnico");
+  }
+});
 
 module.exports = router;
